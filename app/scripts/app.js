@@ -1,45 +1,38 @@
 /** @jsx React.DOM */
+var mockMsgs = [{
+    from: 'tom jones',
+    body: 'its not unusual'
+},{
+    from: 'michael jackson',
+    body: 'beat it'
+}];
 
 var React = window.React = require('react'),
-    Timer = require("./ui/Timer"),
-    mountNode = document.getElementById("app");
+    ChatWindow = require('./ui/ChatWindow'),
+    ChatMessage = require('./ui/ChatMessage');
 
-var TodoList = React.createClass({
-  render: function() {
-    var createItem = function(itemText) {
-      return <li>{itemText}</li>;
-    };
-    return <ul>{this.props.items.map(createItem)}</ul>;
-  }
-});
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {items: [], text: ''};
-  },
-  onChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextItems = this.state.items.concat([this.state.text]);
-    var nextText = '';
-    this.setState({items: nextItems, text: nextText});
-  },
-  render: function() {
-    return (
-      <div>
-        <h3>TODO</h3>
-        <TodoList items={this.state.items} />
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.onChange} value={this.state.text} />
-          <button>{'Add #' + (this.state.items.length + 1)}</button>
-        </form>
-        <Timer />
-      </div>
-    );
-  }
+
+var ReactChat = React.createClass({
+    getInitialState: function () {
+        return {
+            items: mockMsgs
+        };
+    },
+    addMessage: function(msg){
+        var nextItems = this.state.items;
+        nextItems.push(msg);
+        this.setState({items: nextItems});
+
+    },
+    render: function () {
+        return (
+            <div>
+                <ChatWindow items={this.state.items}/>
+                <ChatMessage addAction={this.addMessage} />
+            </div>
+        );
+    }
 });
 
 
-React.renderComponent(<TodoApp />, mountNode);
-
+React.render(<ReactChat />, document.getElementById("app"));
