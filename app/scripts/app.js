@@ -13,16 +13,17 @@ var React = window.React = require('react'),
 
 
 var ReactChat = React.createClass({
+	mixins: [ReactFireMixin],
     getInitialState: function () {
         return {
-            items: mockMsgs
+            items: []
         };
     },
+	componentWillMount: function(){
+		this.bindAsObject(new Firebase("https://burning-fire-3434.firebaseio.com/tagchat/chatrooms/2c5daa2710777330020edb18b0f1a5c4/messages"), "items");
+	},
     addMessage: function(msg){
-        var nextItems = this.state.items;
-        nextItems.push(msg);
-        this.setState({items: nextItems});
-
+		this.firebaseRefs.items.child(new Date().getTime().toString()).set(msg);
     },
     render: function () {
         return (

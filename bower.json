@@ -5,5 +5,12 @@
     "jquery": "~2.1.1",
     "bootstrap-sass-official": ">=3.3.0",
     "modernizr": "^2.8.3"
+  },
+  "devDependencies": {
+    "reactfire": "~0.4.0",
+    "firebase": "~2.2.0"
+  },
+  "resolutions": {
+    "firebase": "~2.2.0"
   }
 }
