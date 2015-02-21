@@ -1,39 +1,39 @@
 /** @jsx React.DOM */
-var mockMsgs = [{
-    from: 'tom jones',
-    body: 'its not unusual'
-},{
-    from: 'michael jackson',
-    body: 'beat it'
-}];
-
 var React = window.React = require('react'),
-    ChatWindow = require('./ui/ChatWindow'),
-    ChatMessage = require('./ui/ChatMessage');
-
+	ChatWindow = require('./ui/ChatWindow'),
+	ChatMessage = require('./ui/ChatMessage'),
+	Auth = require('./ui/Auth');
 
 var ReactChat = React.createClass({
 	mixins: [ReactFireMixin],
-    getInitialState: function () {
-        return {
-            items: []
-        };
-    },
-	componentWillMount: function(){
+	getInitialState: function () {
+		return {
+			items: [],
+			userProfile: null
+		};
+	},
+	componentWillMount: function () {
 		this.bindAsObject(new Firebase("https://burning-fire-3434.firebaseio.com/tagchat/chatrooms/2c5daa2710777330020edb18b0f1a5c4/messages"), "items");
 	},
-    addMessage: function(msg){
+	addMessage: function (msg) {
 		this.firebaseRefs.items.child(new Date().getTime().toString()).set(msg);
-    },
-    render: function () {
-        return (
-            <div>
-                <ChatWindow items={this.state.items}/>
-                <ChatMessage addAction={this.addMessage} />
-            </div>
-        );
-    }
-});
+	},
+	userAuth: function(profile, token){
 
+		// Save the JWT token.
+		localStorage.setItem('userToken', token);
+		this.setState({
+			userProfile: profile
+		});
+
+	},
+	render: function () {
+		return <div>
+			<ChatWindow items={this.state.items} />
+			<ChatMessage userProfile={this.state.userProfile} addAction={this.addMessage} />
+			<Auth userProfile={this.state.userProfile} doUserAuth={this.userAuth} />
+		</div>;
+	}
+});
 
 React.render(<ReactChat />, document.getElementById("app"));

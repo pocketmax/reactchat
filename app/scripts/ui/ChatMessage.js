@@ -15,7 +15,7 @@ var ChatMessage = React.createClass({
 		e.preventDefault();
 
 		var msg = {
-			from: 'foo bar',
+			from: this.props.userProfile.nickname,
 			msg: this.state.msg
 		};
 		this.props.addAction(msg);

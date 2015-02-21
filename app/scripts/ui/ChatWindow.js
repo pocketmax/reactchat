@@ -2,11 +2,6 @@
 var React = require('react');
 
 var ChatWindow = React.createClass({
-	/*
-	 propTypes: {
-	 items: React.PropTypes.object.isRequired
-	 },
-	 */
 	render: function () {
 		var items = this.props.items;
 		var createItem = function (val) {
