@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 
-var Auth0 = require('./plugins/Auth0');
+var Auth0 = require('./../plugins/Auth0');
 
 var Auth = React.createClass({
 	mixins: [Auth0],

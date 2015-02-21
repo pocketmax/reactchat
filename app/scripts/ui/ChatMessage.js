@@ -22,6 +22,9 @@ var ChatMessage = React.createClass({
 		this.setState({msg: ''});
 	},
 	render: function () {
+		console.log('test');
+		if(!this.props.userProfile) return <div></div>;
+		console.log('ing');
 		return <div>
 			<form onSubmit={this.handleSubmit}>
 				<textarea onChange={this.onChange} value={this.state.msg} />

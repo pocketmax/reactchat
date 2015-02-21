@@ -19,6 +19,7 @@ var Auth0 = {
 
 	},
 	logout: function(){
+		// TODO: use Auth0 to logout
 		//signout code goes here
 		console.log(lock);
 		localStorage.remove('profile');
