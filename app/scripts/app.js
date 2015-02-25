@@ -18,7 +18,7 @@ var ReactChat = React.createClass({
 		};
 	},
 	componentWillMount: function () {
-		this.bindAsObject(new Firebase("https://burning-fire-3434.firebaseio.com/tagchat/chatrooms/" + this.getParams().roomId + "/messages"), "items");
+		this.bindAsArray(new Firebase("https://burning-fire-3434.firebaseio.com/tagchat/chatrooms/" + this.getParams().roomId + "/messages"), "items");
 	},
 	addMessage: function (msg) {
 		this.firebaseRefs.items.child(new Date().getTime().toString()).set(msg);
@@ -33,13 +33,19 @@ var ReactChat = React.createClass({
 
 	},
 	render: function () {
-		console.log(this.getParams());
-		return <div>
-			<ChatWindow items={this.state.items} />
-			<ChatMessage userProfile={this.state.userProfile} addAction={this.addMessage} />
-			<Auth userProfile={this.state.userProfile} doUserAuth={this.userAuth} />
+		return <div className="row">
+			<div className="col-sm-8 ">
+				<ChatWindow items={this.state.items} />
+				<Auth userProfile={this.state.userProfile} doUserAuth={this.userAuth} />
+			</div>
+			<div className="col-sm-4">
+				<ChatMessage userProfile={this.state.userProfile} addAction={this.addMessage} />
+			</div>
 			<RouteHandler/>
 		</div>;
+
+
+
 	}
 });
 var routes = (
