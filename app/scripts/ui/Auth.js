@@ -36,11 +36,11 @@ var Auth = React.createClass({
 
 		if( this.props.userProfile ){
 			var button = <div>
-				<button>{'Logout'}</button>
-				<b>Logged in as: {this.props.userProfile.nickname}</b>
+				<button className="btn btn-danger btn-lg pull-right btn-block">{'logout'}</button>
+				<span><b>logged in as {this.props.userProfile.nickname}</b></span>
 			</div>;
 		} else {
-			var button = <button>{'Login'}</button>;
+			var button = <button className="btn btn-success btn-lg pull-right btn-block">{'Login'}</button>;
 		}
 
 		return <div>
