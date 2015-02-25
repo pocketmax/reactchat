@@ -26,8 +26,8 @@ var ChatMessage = React.createClass({
 		// TODO: need to add form validation i.e. can't send blank messages
 		return <div>
 			<form onSubmit={this.handleSubmit}>
-				<div class="form-group">
-					<textarea class="form-control" rows="10" placeholder="New Message" onChange={this.onChange} value={this.state.msg}></textarea>
+				<div className="form-group">
+					<textarea className="form-control" rows="10" placeholder="New Message" onChange={this.onChange} value={this.state.msg}></textarea>
 				</div>
 				<button className="btn btn-primary btn-lg pull-right btn-block">{'Send'}</button>
 			</form>
